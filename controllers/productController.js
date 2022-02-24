@@ -37,7 +37,7 @@ class ControllerProduct {
     })
     .then(productById => {
       // console.log(productById);
-      res.render("productPage", {productById})
+      res.render("productDetailPage", {productById})
     })
     .catch(err => {
       res.send(err)
