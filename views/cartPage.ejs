@@ -12,7 +12,7 @@
   <div class="container">
     <div>
       <h1>
-        Cart milik <%= dataTemp.User.Profile.fullName %> 
+        Cart milik Kamu 
       </h1>
     </div>
     <table class="table table-borderless">
@@ -32,12 +32,19 @@
             <td> <%= el.Product.imageUrl %>  </td>
             <td> <%= el.Product.name %>  </td>
             <td class="d-flex justify-content-end"> <%= formatRupiah(el.Product.price) %> </td>
-            <td> <a class="btn btn-danger" href="/cart/delete/<%= el.id %> ">Delete</a> </td>
+            <td> <a class="btn btn-danger" href="/cart/delete/<%= el.id %>">Delete</a> </td>
           </tr>
-        <% }) %> 
-      </tbody>
-    </table>
-    <p class="d-flex justify-content-end font-weight-bold">Harga Total :<%= formatRupiah(hargaTotal) %></p> 
+          <% }) %> 
+        </tbody>
+      </table>
+      <% if(data.length === 0) { %>
+        <h1 class="d-flex justify-content-center"> Keranjang kamu kosong BRO</h1>
+      <% } else { %>
+        <div class="d-flex justify-content-end ">
+          <p class="font-weight-bold mr-5">Harga Total :<%= formatRupiah(hargaTotal) %></p> 
+          <a class="btn btn-danger" href="/cart/checkout">CheckoutGan</a>
+        </div>
+      <% } %> 
   </div>
 </body>
 </html>

@@ -1,5 +1,6 @@
-const { Cart, User, Product } = require('../models');
+const { Cart, User, Product} = require('../models');
 const formatRupiah = require('../helper/formatRupiah')
+const nodeMail = require('../helper/nodeMailler');
 
 class ControllerCart {
 
@@ -8,7 +9,8 @@ class ControllerCart {
     const { userId } = req.session
     Cart.findAll({
       where: {
-        UserId: userId
+        UserId: userId,
+        status: "Uncheckout"
       },
       include:
         [
@@ -23,13 +25,12 @@ class ControllerCart {
     })
       .then(data => {
         // console.log(data[0].dataValues);
-        let dataTemp = data[0].dataValues
         let hargaTotal = 0
         data.forEach(el => {
           hargaTotal += el.Product.price
         })
         // console.log(hargaTotal);
-        res.render("cartPage", { dataTemp, data, formatRupiah, hargaTotal })
+        res.render("cartPage", { data, formatRupiah, hargaTotal })
       })
       .catch(err => {
         console.log(err);
@@ -50,10 +51,27 @@ class ControllerCart {
   }
 
   static deleteCart(req, res) {
-    console.log(req.params);
+    // console.log(req.params);
     const {id} = req.params
     Cart.destroy({where:{id}})
     .then(_=> {
+      res.redirect("/cart")
+    })
+    .catch(err => {
+      res.send(err)
+    })
+  }
+
+  static updateCheckOut(req, res) {
+    const { userId } = req.session 
+    // console.log(userId);
+    Cart.update({status:"Checkout"},{where: {status: "Uncheckout", UserId: userId}})
+    .then( data =>{
+      const id = userId
+      User.findByPk(id)
+      .then(dataCO => {
+        nodeMail(dataCO.email)
+      })
       res.redirect("/cart")
     })
     .catch(err => {
