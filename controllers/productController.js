@@ -64,6 +64,25 @@ class ControllerProduct {
       })
   }
 
+  static postUpdateProduct(req, res) {
+    // console.log(req.body);
+    // console.log(req.params);
+    const { productId } = req.params
+    const {name, price, stock, imageUrl, description, CategoryId} = req.body
+    Product.update({name, price, stock, imageUrl, description, CategoryId}, {
+      where: {
+        id: productId
+      }
+    })
+    .then( data => {
+      res.redirect("/")
+    })
+    .catch(err => {
+      console.log(err);
+      res.send(err)
+    })
+  }
+
   static fiturDelete (req,res){
     let id = req.params.productId
     Product.destroy({
