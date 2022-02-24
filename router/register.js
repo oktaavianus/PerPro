@@ -5,7 +5,7 @@ const router = express.Router()
 
 
 router.get('/',(req,res)=>{
-    res.send('ini register')
+    res.send('ini regiister')
 })
 
 module.exports = router
