@@ -3,17 +3,36 @@ const formatRupiah = require('../helper/formatRupiah')
 
 class homeController{
   static landingPage (req,res){
-    Product.findAll({
-      include : Category
-    })
-    .then(data =>{
-      // res.send(data)
-      res.render("productPage",{data,formatRupiah})
-    })
-    .catch(err =>{
-      res.send(err)
-      console.log(err)
-    })
+    let name = req.query.category
+    if(name){
+      Product.findAll({
+        include : {
+          model :Category,
+          where :{name:name}
+        }
+      })
+      .then(data =>{
+        // res.send(data)
+        res.render("productPage",{data,formatRupiah})
+      })
+      .catch(err =>{
+        res.send(err)
+        console.log(err)
+      })
+    }else{
+      Product.findAll({
+        include : Category
+      })
+      .then(data =>{
+        // res.send(data)
+        res.render("productPage",{data,formatRupiah})
+      })
+      .catch(err =>{
+        res.send(err)
+        console.log(err)
+      })
+    }
+   
   }
 }
 module.exports = homeController 
