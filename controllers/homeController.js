@@ -13,7 +13,7 @@ class homeController{
       })
       .then(data =>{
         // res.send(data)
-        res.render("productPage",{data,formatRupiah})
+        res.render("productPage",{data, req, formatRupiah})
       })
       .catch(err =>{
         res.send(err)
@@ -25,14 +25,13 @@ class homeController{
       })
       .then(data =>{
         // res.send(data)
-        res.render("productPage",{data,formatRupiah})
+        res.render("productPage",{data, req, formatRupiah})
       })
       .catch(err =>{
         res.send(err)
         console.log(err)
       })
     }
-   
   }
 }
 module.exports = homeController 

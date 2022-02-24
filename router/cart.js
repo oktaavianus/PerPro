@@ -2,13 +2,11 @@
 
 const express = require('express')
 const cartRouter = express.Router()
+const ControllerCart = require('../controllers/cartController');
 
+cartRouter.get('/', ControllerCart.getCart)
+cartRouter.post('/', ControllerCart.postToCart)
 
-cartRouter.get('/',(req,res)=>{
-    res.send('ini cart')
-})
-cartRouter.get('/delete/:ProductId',(req,res)=>{
-  res.send('ini cart delete')
-})
+cartRouter.get('/delete/:id', ControllerCart.deleteCart)
 
 module.exports =cartRouter

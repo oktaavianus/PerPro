@@ -33,6 +33,7 @@ app.use(function (req, res, next) {
     next()
   }
 })
+app.get('/logout', Controller.postLogout)
 
 app.use(router)
 

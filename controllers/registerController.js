@@ -7,12 +7,11 @@ class ControllerRegister {
   }
 
   static postRegister (req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     const { email, name, dateOfBirth, password, roles } = req.body
-
     User.create({email, password, roles}) // User Create
     .then(dataUser => {
-      console.log(dataUser);
+      // console.log(dataUser);
       Profile.create({fullName: name, dateOfBirth, email, UserId: dataUser.dataValues.id})
     })
     .then(data => {

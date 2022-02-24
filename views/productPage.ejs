@@ -23,6 +23,11 @@
           </select>
           <input type="submit" class="btn btn-danger" value="Filter">
         </form>
+        <div class="d-flex justify-content-end" >
+          <%if(req.session.userId){%>
+            <a href="/logout">logout</a>
+          <%}%>
+        </div>
       </div>
       <table class="table">
         <thead class="thead-dark">
