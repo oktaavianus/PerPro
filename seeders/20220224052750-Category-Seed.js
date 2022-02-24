@@ -11,7 +11,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    let dataCategory = JSON.parse(fs.readFileSync("../data/categories.json"))
+    let dataCategory = JSON.parse(fs.readFileSync("./data/categories.json"))
     dataCategory.forEach(el => {
       el.createdAt = new Date()
       el.updatedAt = new Date()
