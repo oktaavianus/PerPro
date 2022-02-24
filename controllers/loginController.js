@@ -3,7 +3,8 @@ const bcrypt = require("bcryptjs");
 
 class ControllerLogin {
   static getLogin(req, res) {
-    res.render("loginPage")
+    const{error} = req.query
+    res.render("loginPage", {error})
   }
 
   static postLogin(req, res) {

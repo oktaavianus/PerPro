@@ -10,6 +10,9 @@
 
 <body>
   <h2>Login Page</h2>
+  <%if(error){%>
+    <p style="color: red;"><%=error%></p>
+  <%}%>
   <a href="#">Home</a>
   <a href="/register">Create an Account</a>
   <form action="/login" method="post">

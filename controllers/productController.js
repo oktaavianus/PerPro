@@ -1,15 +1,21 @@
 const { Category, Product } = require('../models/index');
 const formatRupiah = require('../helper/formatRupiah')
+
 class ControllerProduct {
   static getProductAdd(req, res) {
+    // console.log(req.query);
+    const{ errors } = req.query
+    // console.log(errors);
     Category.findAll()
       .then(dataCategory => {
         // console.log(dataCategory);
-        res.render("productAddPage", { dataCategory })
+        // console.log(errors);
+        res.render("productAddPage", { dataCategory, errors })
       })
       .catch(err => {
-        console.log(err);
-        res.send(err)
+        // console.log(err);
+        
+        res.send(errors)
       })
   }
 
@@ -22,7 +28,13 @@ class ControllerProduct {
         res.redirect("/") //! lempar ke home (home: mas susila)
       })
       .catch(err => {
-        res.send(err)
+        if(err.name === 'SequelizeValidationError') {
+          let errors = []
+          err.errors.forEach(e => {
+            errors.push(e.message)
+          })
+          res.redirect(`/product/add?errors=${errors}`)
+        }
       })
   }
 
@@ -47,6 +59,7 @@ class ControllerProduct {
   static getProductEdit(req, res) {
     // console.log(req.params, 'ini params')
     const id = req.params.productId
+    const{ errors } = req.query
     // console.log(id, 'hasil ambil dari params');
     let dataEdit
     Product.findByPk(+id)
@@ -57,7 +70,7 @@ class ControllerProduct {
       .then(dataCategory => {
         // console.log(dataEdit);
         // console.log(dataCategory);
-        res.render("productEditPage", { dataEdit,  dataCategory})
+        res.render("productEditPage", { dataEdit,  dataCategory, errors})
       })
       .catch(err => {
         res.send(err)
@@ -78,8 +91,14 @@ class ControllerProduct {
       res.redirect("/")
     })
     .catch(err => {
-      console.log(err);
-      res.send(err)
+      // console.log(err);
+      if(err.name === 'SequelizeValidationError') {
+        let errors = []
+        err.errors.forEach(e => {
+          errors.push(e.message)
+        })
+        res.redirect(`/product/${productId}/edit?errors=${errors}`)
+      }
     })
   }
 
