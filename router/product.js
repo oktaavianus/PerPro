@@ -16,8 +16,6 @@ router.post('/:productId/edit',(req,res)=>{
   res.send('ini product/edit')
 })
 
-router.get('/:productId/delete',(req,res)=>{
-  res.send('ini product delete')
-})
+router.get('/:productId/delete',Controller.fiturDelete)
 
 module.exports = router

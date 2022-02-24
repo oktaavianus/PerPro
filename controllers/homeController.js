@@ -7,7 +7,7 @@ class homeController{
     })
     .then(data =>{
       // res.send(data)
-      res.render("productPage",{data})
+      res.render("productPage",{data,})
     })
     .catch(err =>{
       res.send(err)

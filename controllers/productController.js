@@ -43,5 +43,20 @@ class ControllerProduct {
       res.send(err)
     })
   }
+
+  static fiturDelete (req,res){
+    let id = req.params.productId
+    Product.destroy({
+      where: {
+        id: id
+      }
+    })
+    .then(()=> {
+      res.redirect(`/`)
+    })
+    .catch(err => {
+      res.send(err)
+    })
+  }
 }
 module.exports = ControllerProduct
