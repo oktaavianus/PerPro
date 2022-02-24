@@ -1,4 +1,5 @@
 const {Product,Category} = require ('../models')
+const formatRupiah = require('../helper/formatRupiah')
 
 class homeController{
   static landingPage (req,res){
@@ -7,7 +8,7 @@ class homeController{
     })
     .then(data =>{
       // res.send(data)
-      res.render("productPage",{data,})
+      res.render("productPage",{data,formatRupiah})
     })
     .catch(err =>{
       res.send(err)

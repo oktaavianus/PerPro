@@ -30,7 +30,7 @@
               <td><%= i + 1 %> </td>
               <td><a href="/product/<%= e.id %>"><%= e.name %> </a></td>
               <td><%= e.Category.name %> </td>
-              <td><%= e.price %> </td>
+              <td><%= formatRupiah(e.price) %> </td>
               <td><%= e.stock %> </td>
               <td><a href="<%= e.imageUrl %>"><%= e.imageUrl %> </a></td>
             </tr>

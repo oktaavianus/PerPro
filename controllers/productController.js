@@ -1,5 +1,5 @@
 const { Category, Product } = require('../models/index');
-
+const formatRupiah = require('../helper/formatRupiah')
 class ControllerProduct {
   static getProductAdd(req, res) {
     Category.findAll()
@@ -37,7 +37,7 @@ class ControllerProduct {
     })
       .then(productById => {
         // console.log(productById);
-        res.render("productDetailPage", { productById })
+        res.render("productDetailPage", { productById,formatRupiah })
       })
       .catch(err => {
         res.send(err)
