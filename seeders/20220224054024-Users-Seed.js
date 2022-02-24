@@ -11,7 +11,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    let dataUser = JSON.parse(fs.readFileSync('../data/user.json'))
+    let dataUser = JSON.parse(fs.readFileSync('./data/user.json'))
     dataUser.forEach(el => {
       el.createdAt = new Date()
       el.updatedAt = new Date()

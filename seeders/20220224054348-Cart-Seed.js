@@ -11,7 +11,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    let dataCart = JSON.parse(fs.readFileSync('../data/cart.json'))
+    let dataCart = JSON.parse(fs.readFileSync('./data/cart.json'))
     dataCart.forEach(el => {
       el.createdAt = new Date()
       el.updatedAt = new Date()
