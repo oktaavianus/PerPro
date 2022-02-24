@@ -7,11 +7,9 @@ const cartRouter = require('./cart')
 const productRouter = require('./product')
 const profileRouter = require('./profile')
 const registerRouter = require('./register')
-// const Controller = require('../controller')
+const Controller = require('../controllers/homeController')
 
-router.get('/', (req, res) => {
-  res.send('Halaman home')
-})
+router.get('/', Controller.landingPage)
 
 router.use('/login',loginRouter)
 router.use('/product',productRouter)
