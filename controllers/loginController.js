@@ -8,7 +8,7 @@ class ControllerLogin {
   }
 
   static postLogin(req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     const { email, password } = req.body
     User.findOne({
       where: {
@@ -20,6 +20,7 @@ class ControllerLogin {
           const isValidPassword = bcrypt.compareSync(password, user.password)
           if (isValidPassword) {
             req.session.userId = user.id
+            req.session.role = user.roles
             return res.redirect('/')
           } else {
             const error = `Invalid username or password`
@@ -28,6 +29,7 @@ class ControllerLogin {
         }
       })
       .catch(err => {
+        console.log(err);
         res.send(err)
       })
     // const {}

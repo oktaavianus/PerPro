@@ -17,7 +17,7 @@ class homeController{
       })
       .catch(err =>{
         res.send(err)
-        console.log(err)
+        // console.log(err)
       })
     }else{
       Product.findAll({
@@ -29,7 +29,7 @@ class homeController{
       })
       .catch(err =>{
         res.send(err)
-        console.log(err)
+        // console.log(err)
       })
     }
   }
